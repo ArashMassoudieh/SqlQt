@@ -4,10 +4,10 @@
 connectmysql::connectmysql()
 {
     db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("192.168.1.12");
+    db.setHostName("test.cghsjfqfipfe.us-west-2.rds.amazonaws.com");
     db.setUserName("arash");
     db.setPassword("8091921.z.Z");
-    db.setDatabaseName("db_name");
+    db.setDatabaseName("test");
     if( !db.open() )
       {
         qDebug() << db.lastError();

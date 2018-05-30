@@ -5,6 +5,7 @@
 #include <sqlops.h>
 #include "sqldialog.h"
 #include <QTextEdit>
+#include <QInputDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -23,12 +24,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::openCSV()
 {
-    qDebug()<<"here!";
+
     QString fileName = QFileDialog::getOpenFileName(this, ("Open File"),
                                                       "/home",
                                                       ("CSV files (*.csv *.txt)"));
+
+    QString TableName = QInputDialog::getText(this, "Table Name",
+                "Table Name");
     SqlOps SOps;
-    SOps.ConvertCSVtoTable(fileName,"test");
+    SOps.ConvertCSVtoTable(fileName,TableName);
 
 }
 

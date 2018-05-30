@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include <QApplication>
-#include <sql.h>
+//#include <sql.h>
 #include <qsqldatabase.h>
 #include <qdebug.h>
 #include <qsqlerror.h>

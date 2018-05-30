@@ -11,8 +11,9 @@ class SqlOps
 public:
     SqlOps();
     bool ConvertCSVtoTable(QString csvfilename, QString tablename);
+    QStringList gettypesCSV(QString csvfilename);
 };
 
-QString singleqstringwcommas(QStringList &S);
+QString singleqstringwcommas(QStringList &S, bool );
 
 #endif // SQLOPS_H
