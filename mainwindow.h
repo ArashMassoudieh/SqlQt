@@ -20,6 +20,7 @@ public:
 public slots:
     void openCSV();
     void OnSqlCommandsAction();
+    void OnAddRow();
 private:
     Ui::MainWindow *ui;
 };

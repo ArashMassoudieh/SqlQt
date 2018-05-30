@@ -29,15 +29,21 @@ SOURCES += \
     connectmysql.cpp \
     sqlops.cpp \
     sqldialog.cpp \
-    sqltablemodel.cpp
+    sqltablemodel.cpp \
+    form.cpp \
+    formdialog.cpp
 
 HEADERS += \
         mainwindow.h \
     connectmysql.h \
     sqlops.h \
     sqldialog.h \
-    sqltablemodel.h
+    sqltablemodel.h \
+    form.h \
+    formdialog.h
 
 FORMS += \
         mainwindow.ui \
-    sqldialog.ui
+    sqldialog.ui \
+    form.ui \
+    formdialog.ui
