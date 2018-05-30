@@ -6,6 +6,8 @@
 #include "sqldialog.h"
 #include <QTextEdit>
 #include <QInputDialog>
+#include "form.h"
+#include "formdialog.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->actionImport_CSV, SIGNAL(triggered()), this, SLOT(openCSV()));
     connect(ui->actionSql_Commands, SIGNAL(triggered()), this, SLOT(OnSqlCommandsAction()));
-
+    connect(ui->actionAdd_Row, SIGNAL(triggered()), this, SLOT(OnAddRow()));
 }
 
 MainWindow::~MainWindow()
@@ -40,6 +42,19 @@ void MainWindow::OnSqlCommandsAction()
 {
     SqlDialog* sqldialog = new SqlDialog(this);
     sqldialog->show();
+}
+
+void MainWindow::OnAddRow()
+{
+    Form* formaddrow = new Form(this);
+    QList<cField> Fields;
+    cField fld1("name","string","arash");
+    cField fld2("lastname","string","massoudieh");
+    cField fld3("age","int","34");
+    Fields<<fld1<<fld2<<fld3;
+    formaddrow->setup(&Fields);
+    FormDialog* frmdlg = new FormDialog(this,formaddrow);
+    frmdlg->show();
 }
 
 QDockWidget* MainWindow::dock(int i)

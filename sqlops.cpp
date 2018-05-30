@@ -117,3 +117,16 @@ QString singleqstringwcommas(QStringList &S, bool single_quotation=false)
     return s.replace("\"","");
 
 }
+
+cField::cField(QString s1, QString s2, QString s3, QString s4)
+{
+    name = s1;
+    type = s2;
+    defaultval = s3;
+    val = s4;
+}
+
+cField::cField()
+{
+
+}

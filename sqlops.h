@@ -14,6 +14,17 @@ public:
     QStringList gettypesCSV(QString csvfilename);
 };
 
+class cField
+{
+public:
+    cField(QString s1, QString s2=QString(), QString s3 = QString(), QString s4 = QString());
+    cField();
+    QString name;
+    QString type;
+    QString defaultval;
+    QString val;
+};
+
 QString singleqstringwcommas(QStringList &S, bool );
 
 #endif // SQLOPS_H
