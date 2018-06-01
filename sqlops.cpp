@@ -118,10 +118,21 @@ QString singleqstringwcommas(QStringList &S, bool single_quotation=false)
 
 }
 
-cField::cField(QString s1, QString s2, QString s3, QString s4)
+cField::cField(QString _name, QString _type, QString _default_val, QString _val)
+{
+    name = _name;
+    type = _type;
+    defaultval = _default_val;
+    val = _val;
+}
+
+cField::cField(QString s1, int typeID, QString s3, QString s4)
 {
     name = s1;
-    type = s2;
+    if (typeID == 3)
+        type = "int";
+    else if (typeID == 253)
+        type = "string";
     defaultval = s3;
     val = s4;
 }

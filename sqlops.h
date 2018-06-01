@@ -18,6 +18,7 @@ class cField
 {
 public:
     cField(QString s1, QString s2=QString(), QString s3 = QString(), QString s4 = QString());
+    cField(QString s1, int typeID, QString s3 = QString(), QString s4 = QString());
     cField();
     QString name;
     QString type;

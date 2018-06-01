@@ -47,9 +47,15 @@
     </property>
     <addaction name="actionAdd_Row"/>
    </widget>
+   <widget class="QMenu" name="menuSelect_Table">
+    <property name="title">
+     <string>Select Table</string>
+    </property>
+   </widget>
    <addaction name="menuOpen"/>
    <addaction name="menuSql"/>
    <addaction name="menuData"/>
+   <addaction name="menuSelect_Table"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
