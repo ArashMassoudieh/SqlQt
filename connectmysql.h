@@ -9,6 +9,7 @@ class connectmysql
 public:
     connectmysql();
     void close();
+    QSqlDatabase* getdb() {return &db;};
 private:
     QSqlDatabase db;
 };

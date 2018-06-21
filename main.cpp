@@ -12,12 +12,9 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    connectmysql connect;
-    QSqlQuery qry;
-
     MainWindow w;
     w.showMaximized();
 
     return a.exec();
-    connect.close();
+
 }
