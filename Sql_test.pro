@@ -31,7 +31,8 @@ SOURCES += \
     sqldialog.cpp \
     sqltablemodel.cpp \
     form.cpp \
-    formdialog.cpp
+    formdialog.cpp \
+    dlgaddnotes.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,10 +41,12 @@ HEADERS += \
     sqldialog.h \
     sqltablemodel.h \
     form.h \
-    formdialog.h
+    formdialog.h \
+    dlgaddnotes.h
 
 FORMS += \
         mainwindow.ui \
     sqldialog.ui \
     form.ui \
-    formdialog.ui
+    formdialog.ui \
+    dlgaddnotes.ui

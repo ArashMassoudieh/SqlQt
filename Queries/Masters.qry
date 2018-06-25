@@ -1,0 +1,1 @@
+SELECT * FROM CEE_Data.Students where plan="MAS"

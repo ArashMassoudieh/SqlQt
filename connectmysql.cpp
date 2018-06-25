@@ -7,7 +7,7 @@ connectmysql::connectmysql()
     db.setHostName("test.cghsjfqfipfe.us-west-2.rds.amazonaws.com");
     db.setUserName("arash");
     db.setPassword("8091921.z.Z");
-    db.setDatabaseName("test");
+    db.setDatabaseName("CEE_Data");
     if( !db.open() )
       {
         qDebug() << db.lastError();

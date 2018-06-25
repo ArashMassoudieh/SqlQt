@@ -10,7 +10,10 @@
 #include "formdialog.h"
 #include "qsqlrecord.h"
 #include "qsqlfield.h"
-
+#include "qdir.h"
+#include "qsqlquerymodel.h"
+#include "qtableview.h"
+#include "dlgaddnotes.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -19,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->actionImport_CSV, SIGNAL(triggered()), this, SLOT(openCSV()));
     connect(ui->actionSql_Commands, SIGNAL(triggered()), this, SLOT(OnSqlCommandsAction()));
+    connect(ui->actionAdd_Notes, SIGNAL(triggered()), this, SLOT(OnAddNotesAction()));
     connect(ui->actionAdd_Row, SIGNAL(triggered()), this, SLOT(OnAddRow()));
     QStringList tables = getdb()->tables();
     qDebug()<<tables;
@@ -30,6 +34,19 @@ MainWindow::MainWindow(QWidget *parent) :
         connect(actionTables,SIGNAL(triggered()),this, SLOT(OnSelectTable()));
         ui->menuSelect_Table->addAction(actionTables);
     }
+    qDebug()<<QDir::currentPath() + "/Queries";
+    QDir directory(QDir::currentPath() + "/Queries");
+    QStringList queries = directory.entryList(QStringList() << "*.qry" << "*.qry",QDir::Files);
+    foreach(QString filename, queries)
+    {
+        qDebug()<<filename;
+        QAction *actionQueries = new QAction(this);
+        actionQueries->setText(filename.split(".")[0]);
+        actionQueries->setObjectName(filename);
+        connect(actionQueries,SIGNAL(triggered()),this, SLOT(OnSelectQuery()));
+        ui->menuQueries->addAction(actionQueries);
+    }
+
 }
 
 MainWindow::~MainWindow()
@@ -57,6 +74,13 @@ void MainWindow::OnSqlCommandsAction()
     SqlDialog* sqldialog = new SqlDialog(this);
     sqldialog->show();
 }
+
+void MainWindow::OnAddNotesAction()
+{
+    DlgAddNotes* dialog = new DlgAddNotes(this);
+    dialog->show();
+}
+
 
 void MainWindow::OnAddRow()
 {
@@ -101,6 +125,36 @@ void MainWindow::OnSelectTable()
     QAction* pAction = qobject_cast<QAction*>(sender());
     Q_ASSERT(pAction);
     selected_table = pAction->text();
+
+}
+
+void MainWindow::OnSelectQuery()
+{
+    QAction* pAction = qobject_cast<QAction*>(sender());
+    Q_ASSERT(pAction);
+    qDebug()<<QDir::currentPath()+"/Queries/" + pAction->objectName();
+    QFile qryfile(QDir::currentPath()+"/Queries/" + pAction->objectName());
+    qryfile.open(QIODevice::ReadOnly);
+    QSqlQuery qry;
+    QString qrytext = qryfile.readAll();
+    qDebug() << qrytext;
+    qry.prepare(qrytext);
+    if( !qry.exec() )
+        qDebug() << qry.lastError();
+    else
+    {   qDebug() << "Ok!";
+        if (qrytext.toLower().contains("select"))
+        {
+            QSqlQueryModel *model = new QSqlQueryModel(this);
+            model->setQuery(qry);
+
+            QTableView *view = new QTableView;
+            view->setModel(model);
+            view->resizeColumnsToContents();
+            dock(2)->setWidget(view);
+            view->show();
+        }
+    }
 
 }
 

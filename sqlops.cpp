@@ -10,6 +10,79 @@ SqlOps::SqlOps()
 
 }
 
+QStringList SqlOps::getcolumn(QString fieldname, QString tablename)
+{
+    QString s = "select " + fieldname + " from " + tablename;
+    QStringList out;
+    QSqlQuery qry;
+    qry.prepare(s);
+
+    if (!qry.exec())
+    {
+        qDebug()<<qry.lastError();
+    }
+    else
+    {
+        while (qry.next()) {
+            out.append(qry.value(0).toString());
+            qDebug()<<qry.value(0)<<endl;
+            qry.next();
+        }
+    }
+    return out;
+}
+
+QStringList SqlOps::getcolumn(QStringList fieldname, QString tablename)
+{
+    QString s = "select " + fieldname[0];
+    for (int i=1; i<fieldname.size(); i++)
+        s += "," + fieldname[i];
+    s += " from " + tablename;
+    QStringList out;
+    QSqlQuery qry;
+    qry.prepare(s);
+
+    if (!qry.exec())
+    {
+        qDebug()<<qry.lastError();
+    }
+    else
+    {
+        while (qry.next()) {
+            QString fullval = qry.value(0).toString();
+            for (int i=1; i<fieldname.size(); i++)
+            {
+                fullval += ", " + qry.value(i).toString();
+            }
+            out.append(fullval);
+            qry.next();
+        }
+    }
+    return out;
+}
+
+QString SqlOps::getstudentID(QString fullname)
+{
+    qDebug()<<fullname;
+    if (fullname.split(",").size()<2) return "";
+    QString first_name = fullname.split(",")[1].trimmed();
+    QString last_name = fullname.split(",")[0].trimmed();
+    QString s = "select * from Students where TRIM(First_Name) = '" + first_name +"' AND TRIM(Last_name) = '" + last_name + "'";
+    qDebug()<<s;
+    QSqlQuery qry;
+    qry.prepare(s);
+    QString ID;
+    if (!qry.exec())
+    {
+        qDebug()<<qry.lastError();
+    }
+    else
+    {   qry.next();
+        ID = qry.value("EMPL_ID") .toString();
+    }
+    return ID;
+}
+
 QStringList SqlOps::gettypesCSV(QString csvfilename)
 {
     vector<QString> types;

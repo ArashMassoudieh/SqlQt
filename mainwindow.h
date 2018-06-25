@@ -24,8 +24,10 @@ public:
 public slots:
     void openCSV();
     void OnSqlCommandsAction();
+    void OnAddNotesAction();
     void OnAddRow();
     void OnSelectTable();
+    void OnSelectQuery();
 
 
 private:

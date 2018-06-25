@@ -40,6 +40,7 @@
      <string>Sql</string>
     </property>
     <addaction name="actionSql_Commands"/>
+    <addaction name="actionAdd_Notes"/>
    </widget>
    <widget class="QMenu" name="menuData">
     <property name="title">
@@ -52,10 +53,16 @@
      <string>Select Table</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuQueries">
+    <property name="title">
+     <string>Queries</string>
+    </property>
+   </widget>
    <addaction name="menuOpen"/>
    <addaction name="menuSql"/>
    <addaction name="menuData"/>
    <addaction name="menuSelect_Table"/>
+   <addaction name="menuQueries"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -107,6 +114,11 @@
   <action name="actionAdd_Row">
    <property name="text">
     <string>Add Row</string>
+   </property>
+  </action>
+  <action name="actionAdd_Notes">
+   <property name="text">
+    <string>Add Notes</string>
    </property>
   </action>
  </widget>

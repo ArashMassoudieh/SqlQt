@@ -12,6 +12,9 @@ public:
     SqlOps();
     bool ConvertCSVtoTable(QString csvfilename, QString tablename);
     QStringList gettypesCSV(QString csvfilename);
+    QStringList getcolumn(QString fieldname, QString tablename);
+    QStringList getcolumn(QStringList fieldname, QString tablename);
+    QString getstudentID(QString fullname);
 };
 
 class cField
